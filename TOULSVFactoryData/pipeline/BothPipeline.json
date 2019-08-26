@@ -3,11 +3,15 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "LSVPipeline",
+				"name": "ExecuteLSVPipeline",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
+					"pipeline": {
+						"referenceName": "LSVPipeline",
+						"type": "PipelineReference"
+					},
 					"waitOnCompletion": true
 				}
 			},
