@@ -3,13 +3,26 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "ExecuteLSVPipeline",
+				"name": "ExecuteLVPipeline",
 				"type": "ExecutePipeline",
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
 					"pipeline": {
 						"referenceName": "LSVPipeline",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "ExecuteTOUPipeline",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "TOUPipeline",
 						"type": "PipelineReference"
 					},
 					"waitOnCompletion": true
