@@ -13,8 +13,12 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
-			"script": "\n\nsource(output(\n\t\t{MeterPoint Code} as string,\n\t\t{Serial Number} as string,\n\t\t{Plant Code} as string,\n\t\t{Date/Time} as string,\n\t\t{Data Type} as string,\n\t\t{Data Value} as string,\n\t\tUnits as string,\n\t\tStatus as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\twildcardPaths:['LP*.csv']) ~> LSVSource"
+			"transformations": [
+				{
+					"name": "LPAggregate"
+				}
+			],
+			"script": "\n\nsource(output(\n\t\t{MeterPoint Code} as string,\n\t\t{Serial Number} as string,\n\t\t{Plant Code} as string,\n\t\t{Date/Time} as string,\n\t\t{Data Type} as string,\n\t\t{Data Value} as string,\n\t\tUnits as string,\n\t\tStatus as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tpurgeFiles: true,\n\twildcardPaths:['LP*.csv']) ~> LSVSource\nLSVSource aggregate(groupBy({Data Type},\n\t\t{MeterPoint Code}),\n\t{Data Value} = avg({Data Value})) ~> LPAggregate"
 		}
 	}
 }
