@@ -14,7 +14,11 @@
 			],
 			"sinks": [
 				{
-					"name": "sink1"
+					"dataset": {
+						"referenceName": "LPSinkCSV",
+						"type": "DatasetReference"
+					},
+					"name": "TOUSink"
 				}
 			],
 			"transformations": [
@@ -22,7 +26,7 @@
 					"name": "TOUAggregate"
 				}
 			],
-			"script": "\n\nsource(output(\n\t\tMeterCode as string,\n\t\tSerial as string,\n\t\tPlantCode as string,\n\t\tDateTime as string,\n\t\tQuality as string,\n\t\tStream as string,\n\t\tDataType as string,\n\t\tEnergy as double,\n\t\tUnits as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\twildcardPaths:['TOU*.csv']) ~> TOUSource\nTOUSource aggregate(groupBy(MeterCode,\n\t\tDateTime,\n\t\tDataType),\n\t{Average Value} = avg({Energy})) ~> TOUAggregate\nTOUAggregate sink() ~> sink1"
+			"script": "\n\nsource(output(\n\t\tMeterCode as string,\n\t\tSerial as string,\n\t\tPlantCode as string,\n\t\tDateTime as string,\n\t\tQuality as string,\n\t\tStream as string,\n\t\tDataType as string,\n\t\tEnergy as double,\n\t\tUnits as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\twildcardPaths:['TOU*.csv']) ~> TOUSource\nTOUSource aggregate(groupBy(MeterCode,\n\t\tDateTime,\n\t\tDataType),\n\t{Average Value} = avg({Energy})) ~> TOUAggregate\nTOUAggregate sink(input(\n\t\tColumn_1 as string,\n\t\tColumn_2 as string,\n\t\tColumn_3 as string,\n\t\tColumn_4 as string,\n\t\tColumn_5 as string,\n\t\tColumn_6 as string,\n\t\tColumn_7 as string,\n\t\tColumn_8 as string,\n\t\tColumn_9 as string,\n\t\tColumn_10 as string,\n\t\tColumn_11 as string,\n\t\tColumn_12 as string,\n\t\tColumn_13 as string,\n\t\tColumn_14 as string,\n\t\tColumn_15 as string,\n\t\tColumn_16 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> TOUSink"
 		}
 	}
 }
