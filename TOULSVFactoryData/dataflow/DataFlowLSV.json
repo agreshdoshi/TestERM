@@ -1,0 +1,16 @@
+{
+	"name": "DataFlowLSV",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "LSVSource"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "\n\nsource(output(\n\t\t\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> LSVSource"
+		}
+	}
+}
